@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090909" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="description" content="Switch between your Android device's supported refresh rates from an app or Quick Settings tile. akiHz uses Shizuku and requires no root or bootloader changes." />
+    <meta name="author" content="anlaki-py" />
+    <link rel="canonical" href="__SITE_URL__/" />
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/anlaki-py/akihz/main/app/src/main/ic_launcher-playstore.png" />
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/anlaki-py/akihz/main/app/src/main/ic_launcher-playstore.png" />
+    <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="__SITE_URL__/" />
+    <meta property="og:site_name" content="akiHz" />
+    <meta property="og:title" content="akiHz: Android Refresh Rate Switcher Without Root" />
+    <meta property="og:description" content="A small open-source Android app for switching between supported refresh rates using Shizuku. No root required." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/anlaki-py/akihz/main/.github/social-preview.png" />
+    <meta property="og:image:alt" content="akiHz Android refresh rate switcher" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="akiHz: Android Refresh Rate Switcher Without Root" />
+    <meta name="twitter:description" content="A small open-source Android app for switching between supported refresh rates using Shizuku. No root required." />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/anlaki-py/akihz/main/.github/social-preview.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "akiHz",
+        "alternateName": "akiHertz",
+        "url": "https://akihz.anlaki.dev/",
+        "description": "A lightweight, open-source Android refresh rate switcher powered by Shizuku, with a Quick Settings tile and no root requirement.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Android 11 and newer",
+        "isAccessibleForFree": true,
+        "downloadUrl": "https://akihz.anlaki.dev/download/",
+        "codeRepository": "https://github.com/anlaki-py/akihz",
+        "license": "https://github.com/anlaki-py/akihz/blob/main/LICENSE",
+        "author": {
+          "@type": "Person",
+          "name": "anlaki-py",
+          "url": "https://anlaki.dev/",
+          "sameAs": "https://github.com/anlaki-py"
+        },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does akiHz require root?", "acceptedAnswer": { "@type": "Answer", "text": "No. akiHz uses Shizuku to access refresh-rate-related system settings. It does not require an unlocked bootloader, Magisk, or modifications to the system partition." } },
+          { "@type": "Question", "name": "Why does Shizuku need to be running?", "acceptedAnswer": { "@type": "Answer", "text": "Android restricts access to the settings akiHz needs. Shizuku provides a local, permission-controlled bridge to those settings through wireless debugging or ADB." } },
+          { "@type": "Question", "name": "Will it work on my phone?", "acceptedAnswer": { "@type": "Answer", "text": "akiHz detects the rates reported by your display and supports several Android manufacturers, but it has only been personally tested on a Xiaomi phone. Other devices are not guaranteed." } },
+          { "@type": "Question", "name": "Where can I get help or report a problem?", "acceptedAnswer": { "@type": "Answer", "text": "akiHz is a personal project provided as-is and does not offer support or accept bug reports, compatibility requests, or feature requests. Its MIT-licensed source is available to inspect and fork." } }
+        ]
+      }
+    </script>
+    <title>akiHz: Android Refresh Rate Switcher Without Root</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>akiHz is an open-source Android refresh rate switcher that uses Shizuku and does not require root. JavaScript is required to load the current verified APK links.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
