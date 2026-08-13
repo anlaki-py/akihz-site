@@ -6,7 +6,7 @@ const RELEASE_PREFIX = 'https://github.com/anlaki-py/akihz/releases/download/'
 const SUPPORTED_ABIS = new Set(['arm64-v8a', 'armeabi-v7a', 'universal', 'x86', 'x86_64'])
 const SHA256 = /^[a-f0-9]{64}$/
 const REQUEST_TIMEOUT_MS = 7_000
-const FRESH_CACHE_MS = 5 * 60_000
+const FRESH_CACHE_MS = 30_000
 
 let lastGoodMetadata: { value: ReleaseMetadata; fetchedAt: number } | undefined
 
@@ -148,7 +148,7 @@ async function fetchValidatedMetadata() {
 function metadataResponse(metadata: ReleaseMetadata, stale = false) {
   return Response.json(metadata, {
     headers: {
-      'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=3600',
+      'Cache-Control': 'public, max-age=0, s-maxage=30, must-revalidate',
       'X-Robots-Tag': 'noindex, nofollow',
       'X-akiHz-Metadata': stale ? 'stale' : 'fresh',
     },

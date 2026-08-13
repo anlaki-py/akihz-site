@@ -149,8 +149,8 @@ function formatSize(bytes: number) {
 }
 
 export function LatestDownloads() {
-  const [release, setRelease] = useState<ReleaseMetadata | null>(() => readCachedMetadata())
-  const [usingCached, setUsingCached] = useState(() => Boolean(readCachedMetadata()))
+  const [release, setRelease] = useState<ReleaseMetadata | null>(null)
+  const [usingCached, setUsingCached] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<DownloadError | null>(null)
 
@@ -169,6 +169,12 @@ export function LatestDownloads() {
 
   useEffect(() => {
     let active = true
+    const cachedMetadata = readCachedMetadata()
+    if (cachedMetadata) {
+      setRelease(cachedMetadata)
+      setUsingCached(true)
+    }
+
     fetchLatestMetadata()
       .then((metadata) => {
         if (!active) return
