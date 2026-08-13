@@ -142,7 +142,7 @@ async function fetchValidatedMetadata() {
         : new MetadataError('Unexpected metadata error', 'upstream_error'))
     }
   }
-  throw errors.at(-1) ?? new MetadataError('Release metadata is unavailable', 'upstream_error')
+  throw errors[errors.length - 1] ?? new MetadataError('Release metadata is unavailable', 'upstream_error')
 }
 
 function metadataResponse(metadata: ReleaseMetadata, stale = false) {
