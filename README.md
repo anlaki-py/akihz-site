@@ -22,7 +22,7 @@ The build prerenders the landing page, `/download/`, and `/privacy/` for strong 
 
 The project is configured for Vercel through `vercel.json` and uses `https://akihz.anlaki.dev` as its canonical production URL. `SITE_URL` can override that URL for an alternate deployment. Vercel preview domains intentionally retain the production canonical so they do not compete with the custom domain in search results.
 
-The app icon, screenshots, favicon, and social preview are served directly from the akiHz repository's `main` branch, so those visuals update without a website deployment.
+The app icon, screenshots, and social preview are served directly from the akiHz repository's `main` branch, so those visuals update without a website deployment. Search, browser, and Apple touch icons are self-hosted in `public/` so root-level icon requests do not depend on GitHub availability.
 
 The download selector calls a cached Vercel function that retrieves the latest stable release's `release-metadata.json`. The function validates the package name, channel, SDK requirements, APK URLs, sizes, SHA-256 digests, and signing certificate before returning the downloads to the browser.
 

@@ -1,0 +1,16 @@
+{
+  "name": "akiHz",
+  "short_name": "akiHz",
+  "description": "An Android refresh rate switcher powered by Shizuku.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090909",
+  "theme_color": "#090909",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
