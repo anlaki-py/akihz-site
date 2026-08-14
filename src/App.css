@@ -17,7 +17,7 @@
 .topbar nav { display: flex; align-items: center; gap: 30px; }
 .topbar nav a { color: #bdbdbd; text-decoration: none; font-size: 14px; font-weight: 600; transition: color .2s ease; }
 .topbar nav a:hover { color: #fff; }
-.topbar nav > a[aria-label] { display: grid; place-items: center; font-size: 18px; }
+.topbar .nav-repository { display: inline-flex; align-items: center; gap: 8px; }
 .topbar .nav-home { display: inline-flex; align-items: center; gap: 7px; }
 .topbar .nav-download { display: inline-flex; align-items: center; gap: 8px; padding: 11px 17px; color: #090909; background: var(--accent); border-radius: 13px; }
 .topbar .nav-download:hover { color: #090909; background: #fff; }
@@ -152,8 +152,9 @@
   .section { width: min(100% - 28px, var(--max-width)); }
   .topbar { top: 10px; width: calc(100% - 20px); padding-left: 12px; border-radius: 18px; }
   .topbar nav { gap: 12px; }
-  .topbar nav > a:not(.nav-download):not(.nav-home):not([aria-label]) { display: none; }
+  .topbar nav > a:not(.nav-download):not(.nav-home):not(.nav-repository) { display: none; }
   .topbar .nav-home { font-size: 12px; }
+  .topbar .nav-repository { gap: 6px; font-size: 12px; }
   .topbar .nav-download { padding: 10px 12px; }
   .hero { min-height: auto; padding-top: 145px; gap: 25px; }
   .hero h1 { width: 100%; font-size: clamp(62px, 17.5vw, 76px); line-height: .95; letter-spacing: -.04em; }
@@ -188,4 +189,12 @@
   .footer { width: calc(100% - 28px); margin-top: 70px; }
   .footer-content { grid-template-columns: 1fr; gap: 20px; }
   .footer nav { flex-wrap: wrap; gap: 16px 22px; }
+}
+
+@media (max-width: 460px) {
+  .topbar .brand span { display: none; }
+}
+
+@media (max-width: 360px) {
+  .topbar .nav-download { display: none; }
 }

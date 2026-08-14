@@ -97,7 +97,7 @@ function App() {
             </p>
             <div className="hero-actions">
               <a className="button button-primary" href="/download/"><Icon name="download" /> Download APK</a>
-              <a className="button button-secondary" href={REPO_URL} target="_blank" rel="noreferrer"><Icon name="github" /> Source code</a>
+              <a className="button button-secondary" href={REPO_URL} target="_blank" rel="noreferrer"><Icon name="github" /> akiHz GitHub repository</a>
             </div>
             <p className="hero-note">Android 11+ · Requires Shizuku · MIT licensed</p>
           </div>

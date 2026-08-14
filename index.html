@@ -30,24 +30,38 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "akiHz",
-        "alternateName": "akiHertz",
-        "url": "https://akihz.anlaki.dev/",
-        "description": "A lightweight, open-source Android refresh rate switcher powered by Shizuku, with a Quick Settings tile and no root requirement.",
-        "applicationCategory": "UtilitiesApplication",
-        "operatingSystem": "Android 11 and newer",
-        "isAccessibleForFree": true,
-        "downloadUrl": "https://akihz.anlaki.dev/download/",
-        "codeRepository": "https://github.com/anlaki-py/akihz",
-        "license": "https://github.com/anlaki-py/akihz/blob/main/LICENSE",
-        "author": {
-          "@type": "Person",
-          "name": "anlaki-py",
-          "url": "https://anlaki.dev/",
-          "sameAs": "https://github.com/anlaki-py"
-        },
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "@graph": [
+          {
+            "@id": "https://akihz.anlaki.dev/#application",
+            "@type": "SoftwareApplication",
+            "name": "akiHz",
+            "alternateName": "akiHertz",
+            "url": "https://akihz.anlaki.dev/",
+            "description": "A lightweight, open-source Android refresh rate switcher powered by Shizuku, with a Quick Settings tile and no root requirement.",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Android 11 and newer",
+            "isAccessibleForFree": true,
+            "downloadUrl": "https://akihz.anlaki.dev/download/",
+            "license": "https://github.com/anlaki-py/akihz/blob/main/LICENSE",
+            "subjectOf": { "@id": "https://github.com/anlaki-py/akihz#source" },
+            "author": {
+              "@type": "Person",
+              "name": "anlaki-py",
+              "url": "https://anlaki.dev/",
+              "sameAs": "https://github.com/anlaki-py"
+            },
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          },
+          {
+            "@id": "https://github.com/anlaki-py/akihz#source",
+            "@type": "SoftwareSourceCode",
+            "name": "akiHz source code",
+            "codeRepository": "https://github.com/anlaki-py/akihz",
+            "license": "https://github.com/anlaki-py/akihz/blob/main/LICENSE",
+            "runtimePlatform": "Android 11 and newer",
+            "targetProduct": { "@id": "https://akihz.anlaki.dev/#application" }
+          }
+        ]
       }
     </script>
     <script type="application/ld+json">
