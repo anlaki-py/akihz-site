@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { LATEST_RELEASE_ENDPOINT } from '../constants'
+import { LATEST_RELEASE_ENDPOINT, RELEASES_URL } from '../constants'
 import { Icon } from './Icon'
 
 type ReleaseAsset = {
@@ -214,6 +214,12 @@ export function LatestDownloads() {
           <p>{error.message}</p>
           {error.retryable && <button className="button button-secondary" type="button" onClick={loadRelease}>Try again</button>}
         </div>
+      )}
+
+      {!release && (
+        <p className="download-fallback">
+          If this check does not finish, <a href={RELEASES_URL}>get the latest release on GitHub</a>.
+        </p>
       )}
 
       {release && downloads && (

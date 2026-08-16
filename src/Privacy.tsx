@@ -13,6 +13,20 @@ function Privacy() {
           <h1>Privacy Policy</h1>
           <p className="privacy-intro">akiHz does not include advertising, analytics, accounts, or tracking. This page explains the limited information used by the Android app and this website.</p>
           <p className="policy-meta">Effective and last updated: August 13, 2026</p>
+          <nav className="policy-navigation" aria-label="Privacy policy sections">
+            <p>On this page</p>
+            <ol>
+              <li><a href="#summary">Summary</a></li>
+              <li><a href="#app-data">Information used by the app</a></li>
+              <li><a href="#permissions">Permissions</a></li>
+              <li><a href="#third-parties">Third-party services</a></li>
+              <li><a href="#website">Website behavior</a></li>
+              <li><a href="#choices">Your choices</a></li>
+              <li><a href="#children">Children’s privacy</a></li>
+              <li><a href="#changes">Changes</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ol>
+          </nav>
         </header>
 
         <article className="policy-content">

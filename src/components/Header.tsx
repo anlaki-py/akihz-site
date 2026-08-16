@@ -19,7 +19,16 @@ export function Header({ page = 'home' }: HeaderProps) {
           <a href="#faq">FAQ</a>
         </>}
         {!home && <a className="nav-home" href="/"><Icon name="arrow-left" /> Back to home</a>}
-        <a className="nav-repository" href={REPO_URL} target="_blank" rel="noreferrer"><Icon name="github" /> akiHz GitHub repository</a>
+        <a
+          className="nav-repository"
+          href={REPO_URL}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="akiHz GitHub repository"
+          title="akiHz GitHub repository"
+        >
+          <Icon name="github" />
+        </a>
         {page !== 'download' && <a className="nav-download" href="/download/">Download <Icon name="arrow" /></a>}
       </nav>
     </header>

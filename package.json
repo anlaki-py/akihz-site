@@ -10,6 +10,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build && vite build --ssr src/ssr.tsx --outDir .ssr && node scripts/prerender.mjs && node scripts/generate-seo.mjs",
     "lint": "oxlint",
+    "test": "npm run build && node scripts/verify-prerender.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
