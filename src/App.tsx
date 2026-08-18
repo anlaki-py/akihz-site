@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Icon } from './components/Icon'
@@ -48,53 +47,6 @@ const faqs = [
   },
 ]
 
-const REFRESH_RATES = [45, 48, 50, 60, 72, 75, 90, 96, 144, 165, 120]
-const FINAL_RATE_INDEX = REFRESH_RATES.length - 1
-
-function AnimatedRefreshRate() {
-  const [activeIndex, setActiveIndex] = useState(FINAL_RATE_INDEX)
-  const [previousIndex, setPreviousIndex] = useState<number | null>(null)
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    let interval: number | undefined
-    const start = window.setTimeout(() => {
-      setActiveIndex(0)
-      let nextIndex = 1
-      interval = window.setInterval(() => {
-        setActiveIndex((currentIndex) => {
-          setPreviousIndex(currentIndex)
-          return nextIndex
-        })
-        nextIndex += 1
-        if (nextIndex >= REFRESH_RATES.length) window.clearInterval(interval)
-      }, 700)
-    }, 450)
-
-    return () => {
-      window.clearTimeout(start)
-      if (interval !== undefined) window.clearInterval(interval)
-    }
-  }, [])
-
-  return (
-    <span className="rate-display" aria-hidden="true">
-      <span className="rate-value">
-        {REFRESH_RATES.map((rate, index) => (
-          <span
-            className={`rate-number${index === activeIndex ? ' is-active' : ''}${index === previousIndex ? ' is-previous' : ''}`}
-            key={rate}
-          >
-            {rate}
-          </span>
-        ))}
-      </span>
-      <span className="rate-unit">Hz.</span>
-    </span>
-  )
-}
-
 function App() {
   return (
     <div className="site-shell">
@@ -103,10 +55,15 @@ function App() {
       <main id="main-content">
         <section className="hero section" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <h1 id="hero-title" aria-label="Set it to a refresh rate supported by your display.">
+            <h1 id="hero-title" aria-label="One click. Set it to 120 Hz.">
               <span className="hero-title-text" aria-hidden="true">
-                <span className="hero-title-prefix">Set it to</span>
-                <AnimatedRefreshRate />
+                <span className="hero-title-prefix">One click. Set it to</span>
+                <span className="rate-display">
+                  <span className="rate-value">
+                    <span className="rate-number is-active">120</span>
+                  </span>
+                  <span className="rate-unit">Hz.</span>
+                </span>
               </span>
             </h1>
             <p className="hero-lede">

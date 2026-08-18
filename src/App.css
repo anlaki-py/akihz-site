@@ -30,9 +30,7 @@
 .hero-title-prefix { display: block; }
 .rate-display { width: max-content; margin-top: .1em; display: flex; align-items: baseline; color: var(--accent); line-height: 1.08; letter-spacing: -.035em; white-space: nowrap; }
 .rate-value { width: 3.45ch; height: 1.08em; display: grid; align-items: center; justify-items: center; overflow: hidden; font-variant-numeric: tabular-nums; }
-.rate-number { grid-area: 1 / 1; padding-inline: .08em; line-height: 1; opacity: 0; transform: translateY(.42em); transition: opacity .48s ease, transform .58s cubic-bezier(.22, 1, .36, 1); will-change: opacity, transform; }
-.rate-number.is-active { opacity: 1; transform: translateY(0); }
-.rate-number.is-previous { opacity: 0; transform: translateY(-.42em); }
+.rate-number { grid-area: 1 / 1; padding-inline: .08em; line-height: 1; }
 .rate-unit { margin-left: .08em; letter-spacing: -.045em; }
 .hero-lede { margin: 32px 0 0; max-width: 620px; color: #b5b5b5; font-size: clamp(17px, 2vw, 21px); line-height: 1.55; }
 .hero-actions { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
