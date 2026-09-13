@@ -1,26 +1,34 @@
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
-import { Icon } from './components/Icon'
-import { PhoneFrame } from './components/PhoneFrame'
-import { REPO_URL, SCREENSHOTS, SHIZUKU_URL } from './constants'
+import { MaterialIcon } from './components/MaterialIcon'
+import { REPO_URL, SHIZUKU_URL } from './constants'
 import './App.css'
 
 const features = [
   {
+    icon: 'smartphone',
     title: 'Detects supported rates',
     body: 'Reads the refresh rates reported by your display.',
   },
   {
+    icon: 'widgets',
     title: 'Quick Settings tile',
-    body: 'Cycles through rates without opening the app.',
+    body: 'Cycles through the rates you pick on Home, without opening the app.',
   },
   {
+    icon: 'speed',
+    title: 'Live FPS overlay',
+    body: 'Shows real app FPS from SurfaceFlinger in a draggable pill, with its own Quick Settings tile.',
+  },
+  {
+    icon: 'tune',
     title: 'Device-specific controls',
     body: 'Supports OEM overrides and custom profiles when needed.',
   },
   {
+    icon: 'verified',
     title: 'Verified updates',
-    body: 'Checks APK downloads against published release metadata.',
+    body: 'Verifies APK downloads against published release metadata. Update checks run daily, every 3 days, or weekly.',
   },
 ]
 
@@ -36,6 +44,11 @@ const faqs = [
     answer: 'Android restricts access to the settings akiHz needs. Shizuku provides a local, permission-controlled bridge to those settings through wireless debugging or ADB. akiHz asks for authorization through Shizuku and does not receive unrestricted root access.',
   },
   {
+    id: 'fps-overlay',
+    question: 'Does the FPS overlay show my refresh rate?',
+    answer: 'No. The pill shows real presented app FPS read from SurfaceFlinger, not screen Hz. A 120 Hz screen can still show a 30 FPS game. Start it from Settings, FPS Monitor, or the FPS tile. It needs Shizuku and overlay permission, and Settings controls its size, opacity, color, shape, and label.',
+  },
+  {
     id: 'device-compatibility',
     question: 'Will it work on my phone?',
     answer: 'akiHz detects the rates reported by your display and includes strategies for several Android manufacturers. It has only been personally tested on a Xiaomi phone, however, so other devices are not guaranteed. If automatic detection chooses the wrong settings, you can try the OEM override or create a custom profile.',
@@ -47,6 +60,27 @@ const faqs = [
   },
 ]
 
+const steps = [
+  {
+    title: 'Start Shizuku',
+    body: (
+      <>Install <a href={SHIZUKU_URL} target="_blank" rel="noreferrer">Shizuku</a> and start it using wireless debugging or ADB.</>
+    ),
+  },
+  {
+    title: 'Grant access',
+    body: 'Open akiHz and approve its Shizuku permission request, plus notification and overlay access when asked.',
+  },
+  {
+    title: 'Choose a rate',
+    body: 'Select a detected rate in the app or use the Quick Settings tile.',
+  },
+  {
+    title: 'See live FPS',
+    body: 'Start the FPS monitor from Settings or its Quick Settings tile, then drag the pill where you want it.',
+  },
+]
+
 function App() {
   return (
     <div className="site-shell">
@@ -55,73 +89,55 @@ function App() {
       <main id="main-content">
         <section className="hero section" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <h1 id="hero-title" aria-label="One click. Set it to 120 Hz.">
-              <span className="hero-title-text" aria-hidden="true">
-                <span className="hero-title-prefix">One click. Set it to</span>
-                <span className="rate-display">
-                  <span className="rate-value">
-                    <span className="rate-number is-active">120</span>
-                  </span>
-                  <span className="rate-unit">Hz.</span>
-                </span>
-              </span>
-            </h1>
+            <h1 id="hero-title">One click. Set it to 120 Hz.</h1>
             <p className="hero-lede">
-              akiHz switches between the refresh rates your Android device actually supports, from the app or a Quick Settings tile. It runs through Shizuku, with no root or bootloader changes.
+              akiHz switches between the refresh rates your Android device actually supports, from the app or a Quick Settings tile. It also shows live app FPS in a floating pill you can drag anywhere. It runs through Shizuku, with no root or bootloader changes.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="/download/"><Icon name="download" /> Download APK</a>
-              <a className="button button-secondary" href={REPO_URL} target="_blank" rel="noreferrer"><Icon name="github" /> akiHz GitHub repository</a>
+              <a href="/download/"><md-filled-button><MaterialIcon name="download" slot="icon" />Download APK</md-filled-button></a>
+              <a href={REPO_URL} target="_blank" rel="noreferrer"><md-outlined-button><MaterialIcon name="code" slot="icon" />GitHub repository</md-outlined-button></a>
             </div>
             <p className="hero-note">
               Android 11+ · Requires <a href="#shizuku-explanation">Shizuku</a> · MIT licensed<br />
               Personally tested on Xiaomi; other OEM strategies are community-reported.
             </p>
           </div>
-
-          <div className="hero-visual">
-            <PhoneFrame
-              className="hero-phone"
-              src={SCREENSHOTS.homeDark}
-              alt="akiHz home screen with 60 Hz active and 60 and 90 Hz included in the Quick Settings tile cycle"
-              caption="Filled = active rate · Toggle = included in the Quick Settings cycle"
-              priority
-              interactive
-            />
-          </div>
         </section>
 
         <section className="section features" id="features" aria-labelledby="features-title">
-          <header className="section-heading">
-            <h2 id="features-title">What it does</h2>
-          </header>
+          <h2 id="features-title">What it does</h2>
+          <p className="section-sub">Five things, no more.</p>
           <div className="feature-grid">
             {features.map((feature) => (
-              <article className="feature-card" key={feature.title}>
+              <md-filled-card className="feature-card" key={feature.title}>
+                <MaterialIcon name={feature.icon} />
                 <h3>{feature.title}</h3>
                 <p>{feature.body}</p>
-              </article>
+              </md-filled-card>
             ))}
           </div>
         </section>
 
         <section className="section setup" id="setup" aria-labelledby="setup-title">
-          <header className="section-heading">
-            <h2 id="setup-title">Setup</h2>
-          </header>
-          <ol className="steps">
-            <li><h3>Start Shizuku</h3><p>Install <a href={SHIZUKU_URL} target="_blank" rel="noreferrer">Shizuku</a> and start it using wireless debugging or ADB.</p></li>
-            <li><h3>Grant access</h3><p>Open akiHz and approve its Shizuku permission request.</p></li>
-            <li><h3>Choose a rate</h3><p>Select a detected rate in the app or use the Quick Settings tile.</p></li>
-          </ol>
-          <p className="setup-note"><strong>Requires:</strong> Android 11+, Shizuku, and a display with multiple refresh rates. Only Xiaomi has been personally tested.</p>
+          <h2 id="setup-title">Setup</h2>
+          <p className="section-sub">Four steps, about five minutes.</p>
+          <md-list className="steps">
+            {steps.map((step, index) => (
+              <md-list-item key={step.title}>
+                <span slot="start" className="step-avatar" aria-hidden="true">{index + 1}</span>
+                <div slot="headline">{step.title}</div>
+                <div slot="supporting-text">{step.body}</div>
+              </md-list-item>
+            ))}
+          </md-list>
+          <p className="setup-note">Requires Android 11+, Shizuku, and a display with multiple refresh rates. Only Xiaomi has been personally tested. A Background setting keeps the tile ready, and Appearance offers a true-black AMOLED theme.</p>
         </section>
 
         <section className="faq section" id="faq" aria-labelledby="faq-title">
-          <header className="section-heading"><h2 id="faq-title">FAQ</h2></header>
+          <h2 id="faq-title">FAQ</h2>
           <div className="faq-list">
             {faqs.map((faq) => (
-              <article className="faq-item" id={faq.id} key={faq.question}>
+              <article className="faq-item" id={faq.id} key={faq.id}>
                 <h3>{faq.question}</h3>
                 <p>{faq.answer}</p>
               </article>

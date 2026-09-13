@@ -14,12 +14,10 @@ assert.match(
 )
 assert.match(download, /If this check does not finish/, 'download fallback must explain when to use it')
 
-const activeRates = [...home.matchAll(/rate-number is-active[^>]*>(\d+)</g)].map((match) => match[1])
-assert.deepEqual(activeRates, ['120'], 'home HTML must render one stable final refresh rate')
+assert.match(home, /One click\. Set it to 120 Hz\./, 'home HTML must render the stable headline rate')
 assert.match(home, /href="#shizuku-explanation"/, 'hero Shizuku text must link to its explanation')
 assert.match(home, /Personally tested on Xiaomi/, 'hero must disclose the tested-device caveat')
-assert.match(home, /Filled = active rate/, 'phone preview must explain its visual states')
-assert.match(home, /aria-label="akiHz GitHub repository"/, 'repository icon must keep its accessible name')
+assert.match(home, /aria-label="akiHz GitHub repository"/, 'repository link must keep its accessible name')
 
 const privacySections = [
   'summary',

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { LATEST_RELEASE_ENDPOINT, RELEASES_URL } from '../constants'
-import { Icon } from './Icon'
+import { MaterialIcon } from './MaterialIcon'
 
 type ReleaseAsset = {
   abi: string
@@ -198,13 +198,13 @@ export function LatestDownloads() {
 
   return (
     <section className="download section" id="downloads" aria-labelledby="download-title">
-      <div className="download-glow" />
       <h1 id="download-title">Download akiHz</h1>
       <p>Download the universal APK. It works across supported Android device architectures.</p>
 
       {!release && loading && (
         <div className="download-loading" role="status">
-          <span className="loading-spinner" /> Verifying the latest release…
+          <md-circular-progress indeterminate aria-label="Verifying the latest release" />
+          <span>Verifying the latest release…</span>
         </div>
       )}
 
@@ -212,7 +212,7 @@ export function LatestDownloads() {
         <div className="download-error" role="alert">
           <strong>Downloads unavailable</strong>
           <p>{error.message}</p>
-          {error.retryable && <button className="button button-secondary" type="button" onClick={loadRelease}>Try again</button>}
+          {error.retryable && <md-text-button type="button" onClick={loadRelease}><MaterialIcon name="refresh" slot="icon" />Try again</md-text-button>}
         </div>
       )}
 
@@ -226,24 +226,26 @@ export function LatestDownloads() {
         <div className="release-downloads">
           {(usingCached || error) && (
             <div className="download-warning" role="status">
-              Showing the last verified release saved by this browser.
-              {error?.retryable && <button type="button" onClick={loadRelease}>Check again</button>}
+              <span>Showing the last verified release saved by this browser.</span>
+              {error?.retryable && <md-text-button type="button" onClick={loadRelease}>Check again</md-text-button>}
             </div>
           )}
           {universalDownload ? (
-            <div className="primary-download">
-              <strong>Universal APK</strong>
+            <md-elevated-card className="primary-download">
+              <div className="primary-head">
+                <MaterialIcon name="smartphone" />
+                <strong>Universal APK</strong>
+              </div>
               <p>Works on supported Android devices.</p>
               <a
-                className="primary-download-action"
                 href={universalDownload.url}
                 download={universalDownload.file}
                 aria-label={`Download akiHz ${release.versionName} universal APK, ${formatSize(universalDownload.size)}`}
               >
-                <Icon name="download" /> Download APK
+                <md-filled-button><MaterialIcon name="download" slot="icon" />Download APK</md-filled-button>
               </a>
               <small>Version {release.versionName} · {formatSize(universalDownload.size)}</small>
-            </div>
+            </md-elevated-card>
           ) : (
             <div className="download-error" role="alert">
               <strong>Universal APK unavailable</strong>
@@ -258,34 +260,44 @@ export function LatestDownloads() {
                 <span>Stable v{release.versionName}</span>
                 <span>Android API {release.minSdk}+ · {new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(new Date(release.releaseDate))}</span>
               </div>
-              <div className="download-list">
+              <md-list className="download-list">
                 {advancedDownloads?.map((asset) => {
                   const info = DOWNLOAD_INFO[asset.abi]
                   return (
-                    <a className="download-row" href={asset.url} download={asset.file} key={asset.abi}>
-                      <span className="download-name">
-                        <span>{info.architecture}</span>
-                        <small>{info.description}</small>
-                        <small className="download-sha" title={asset.sha256}>SHA-256 {asset.sha256}</small>
-                      </span>
-                      <code>{info.label}</code>
-                      <span className="download-size">{formatSize(asset.size)}</span>
-                      <span className="download-action"><Icon name="download" /></span>
+                    <a href={asset.url} download={asset.file} key={asset.abi} title={`SHA-256 ${asset.sha256}`}>
+                      <md-list-item>
+                        <div slot="headline">{info.architecture} · {info.label}</div>
+                        <div slot="supporting-text">{info.description}</div>
+                        <div slot="trailing-supporting-text" className="download-row-end">
+                          <span className="download-size">{formatSize(asset.size)}</span>
+                          <MaterialIcon name="download" />
+                        </div>
+                      </md-list-item>
                     </a>
                   )
                 })}
-              </div>
+              </md-list>
               <div className="download-footnote">
-                <span title={release.signingCertificate.sha256}><Icon name="shield" /> Signing certificate {release.signingCertificate.sha256}</span>
-                <span>
-                  <a href={release.changelog} target="_blank" rel="noreferrer">Changelog</a>
-                  <a href={release.releaseUrl} target="_blank" rel="noreferrer">Release details</a>
+                <span>Signing certificate {release.signingCertificate.sha256}</span>
+                <span className="download-footnote-links">
+                  <a href={release.changelog} target="_blank" rel="noreferrer"><md-assist-chip label="Changelog"><MaterialIcon name="description" slot="icon" /></md-assist-chip></a>
+                  <a href={release.releaseUrl} target="_blank" rel="noreferrer"><md-assist-chip label="Release details"><MaterialIcon name="open_in_new" slot="icon" /></md-assist-chip></a>
                 </span>
               </div>
             </div>
           </details>
           {loading && release && <p className="download-refreshing" role="status">Checking for a newer release…</p>}
         </div>
+      )}
+      {universalDownload && (
+        <a
+          className="download-fab"
+          href={universalDownload.url}
+          download={universalDownload.file}
+          aria-label={`Download akiHz ${release?.versionName} universal APK`}
+        >
+          <md-fab aria-label="Download universal APK"><MaterialIcon name="download" slot="icon" /></md-fab>
+        </a>
       )}
     </section>
   )

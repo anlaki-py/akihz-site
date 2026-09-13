@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { hydrateRoot } from 'react-dom/client'
+import './register-material'
 import NotFound from './NotFound'
 import './index.css'
 

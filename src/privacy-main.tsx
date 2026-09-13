@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
+import './register-material'
 import './index.css'
 import Privacy from './Privacy'
 

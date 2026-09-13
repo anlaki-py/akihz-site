@@ -10,7 +10,7 @@ function NotFound() {
         <p className="not-found-code">404</p>
         <h1>Page not found</h1>
         <p>The page you requested does not exist or may have moved.</p>
-        <a className="button button-primary" href="/">Go to home</a>
+        <a href="/"><md-filled-button>Go to home</md-filled-button></a>
       </main>
       <Footer />
     </div>
