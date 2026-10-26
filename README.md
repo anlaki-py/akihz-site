@@ -16,7 +16,9 @@ npm run build
 npm run preview
 ```
 
-The build prerenders the landing page, `/download/`, and `/privacy/` for strong initial-load performance and search-engine visibility. It also generates `sitemap.xml` and `robots.txt`.
+The home page is a minimal monochrome download page. `/download/` uses the same download view, with setup and documentation linked to GitHub.
+
+The build prerenders `/`, `/download/`, and `/privacy/` for strong initial-load performance and search-engine visibility. It also generates `sitemap.xml` and `robots.txt`.
 
 ## Deployment
 

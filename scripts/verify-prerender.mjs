@@ -14,10 +14,13 @@ assert.match(
 )
 assert.match(download, /If this check does not finish/, 'download fallback must explain when to use it')
 
-assert.match(home, /One click\. Set it to 120 Hz\./, 'home HTML must render the stable headline rate')
-assert.match(home, /href="#shizuku-explanation"/, 'hero Shizuku text must link to its explanation')
-assert.match(home, /Personally tested on Xiaomi/, 'hero must disclose the tested-device caveat')
-assert.match(home, /aria-label="akiHz GitHub repository"/, 'repository link must keep its accessible name')
+for (const [name, html] of [['home', home], ['download', download]]) {
+  assert.match(html, /<h1 id="download-title">Download akiHz<\/h1>/, `${name} must show downloads immediately`)
+  assert.match(html, /href="https:\/\/github\.com\/anlaki-py\/akihz\/releases\/latest"/, `${name} must offer downloads without JavaScript or a working API`)
+  assert.match(html, /aria-label="akiHz GitHub repository"/, `${name} repository link must keep its accessible name`)
+  assert.doesNotMatch(html, /href="#(?:features|setup|faq|shizuku-explanation)"/, `${name} must not link to removed sections`)
+  assert.doesNotMatch(html, /FAQPage|What it does|One click\. Set it to 120 Hz\./, `${name} must not retain the old marketing content`)
+}
 
 const privacySections = [
   'summary',

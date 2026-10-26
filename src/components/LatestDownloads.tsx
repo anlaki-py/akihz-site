@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { LATEST_RELEASE_ENDPOINT, RELEASES_URL } from '../constants'
+import { ICON_URL, LATEST_RELEASE_ENDPOINT, RELEASES_URL, REPO_URL } from '../constants'
 import { MaterialIcon } from './MaterialIcon'
 
 type ReleaseAsset = {
@@ -198,8 +198,10 @@ export function LatestDownloads() {
 
   return (
     <section className="download section" id="downloads" aria-labelledby="download-title">
+      <img className="download-icon" src={ICON_URL} alt="" width={80} height={80} />
       <h1 id="download-title">Download akiHz</h1>
-      <p>Download the universal APK. It works across supported Android device architectures.</p>
+      <p className="download-description">Refresh rate control for Android.</p>
+      <p className="download-requirements">Android 11+ · Requires Shizuku</p>
 
       {!release && loading && (
         <div className="download-loading" role="status">
@@ -236,7 +238,7 @@ export function LatestDownloads() {
                 <MaterialIcon name="smartphone" />
                 <strong>Universal APK</strong>
               </div>
-              <p>Works on supported Android devices.</p>
+              <p>One APK for all supported architectures.</p>
               <a
                 href={universalDownload.url}
                 download={universalDownload.file}
@@ -254,51 +256,29 @@ export function LatestDownloads() {
           )}
 
           <details className="advanced-downloads">
-            <summary>Advanced options</summary>
-            <div className="advanced-content">
-              <div className="release-meta">
-                <span>Stable v{release.versionName}</span>
-                <span>Android API {release.minSdk}+ · {new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(new Date(release.releaseDate))}</span>
-              </div>
-              <md-list className="download-list">
-                {advancedDownloads?.map((asset) => {
-                  const info = DOWNLOAD_INFO[asset.abi]
-                  return (
-                    <a href={asset.url} download={asset.file} key={asset.abi} title={`SHA-256 ${asset.sha256}`}>
-                      <md-list-item>
-                        <div slot="headline">{info.architecture} · {info.label}</div>
-                        <div slot="supporting-text">{info.description}</div>
-                        <div slot="trailing-supporting-text" className="download-row-end">
-                          <span className="download-size">{formatSize(asset.size)}</span>
-                          <MaterialIcon name="download" />
-                        </div>
-                      </md-list-item>
-                    </a>
-                  )
-                })}
-              </md-list>
-              <div className="download-footnote">
-                <span>Signing certificate {release.signingCertificate.sha256}</span>
-                <span className="download-footnote-links">
-                  <a href={release.changelog} target="_blank" rel="noreferrer"><md-assist-chip label="Changelog"><MaterialIcon name="description" slot="icon" /></md-assist-chip></a>
-                  <a href={release.releaseUrl} target="_blank" rel="noreferrer"><md-assist-chip label="Release details"><MaterialIcon name="open_in_new" slot="icon" /></md-assist-chip></a>
-                </span>
-              </div>
-            </div>
+            <summary>Other architectures</summary>
+            <md-list className="download-list">
+              {advancedDownloads?.map((asset) => {
+                const info = DOWNLOAD_INFO[asset.abi]
+                return (
+                  <a href={asset.url} download={asset.file} key={asset.abi} title={`SHA-256 ${asset.sha256}`}>
+                    <md-list-item>
+                      <div slot="headline">{info.architecture} · {info.label}</div>
+                      <div slot="supporting-text">{info.description}</div>
+                      <div slot="trailing-supporting-text" className="download-row-end">
+                        <span className="download-size">{formatSize(asset.size)}</span>
+                        <MaterialIcon name="download" />
+                      </div>
+                    </md-list-item>
+                  </a>
+                )
+              })}
+            </md-list>
           </details>
           {loading && release && <p className="download-refreshing" role="status">Checking for a newer release…</p>}
         </div>
       )}
-      {universalDownload && (
-        <a
-          className="download-fab"
-          href={universalDownload.url}
-          download={universalDownload.file}
-          aria-label={`Download akiHz ${release?.versionName} universal APK`}
-        >
-          <md-fab aria-label="Download universal APK"><MaterialIcon name="download" slot="icon" /></md-fab>
-        </a>
-      )}
+      <a className="project-link" href={REPO_URL} target="_blank" rel="noreferrer">Setup &amp; documentation on GitHub</a>
     </section>
   )
 }
