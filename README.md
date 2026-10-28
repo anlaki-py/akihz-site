@@ -28,6 +28,8 @@ The app icon, screenshots, and social preview are served directly from the akiHz
 
 The download selector calls a cached Vercel function that retrieves the latest stable release's `release-metadata.json`. The function validates the package name, channel, SDK requirements, APK URLs, sizes, SHA-256 digests, and signing certificate before returning the downloads to the browser.
 
+Both download pages show release notes fetched from the matching GitHub release tag, plus a link to the full changelog. Notes share the metadata cache; a failed notes request leaves APK downloads available and offers a GitHub fallback.
+
 During `npm run dev`, Vite serves the same validation handler at `/api/latest-release`, so the live download selector works without installing the Vercel CLI.
 
 ## Launch checklist

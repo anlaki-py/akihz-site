@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ICON_URL, LATEST_RELEASE_ENDPOINT, RELEASES_URL, REPO_URL } from '../constants'
 import { MaterialIcon } from './MaterialIcon'
+import { ReleaseNotes } from './ReleaseNotes'
 
 type ReleaseAsset = {
   abi: string
@@ -25,6 +26,7 @@ type ReleaseMetadata = {
   requirements: { shizuku: { required: true; url: string } }
   signingCertificate: { sha256: string }
   assets: ReleaseAsset[]
+  releaseNotes?: string
 }
 
 type DownloadInfo = {
@@ -82,6 +84,8 @@ function isUsableMetadata(value: unknown): value is ReleaseMetadata {
     metadata.packageName === 'akihz.anlaki.dev' &&
     metadata.channel === 'stable' && metadata.prerelease === false &&
     typeof metadata.versionName === 'string' &&
+    (metadata.releaseNotes === undefined ||
+      (typeof metadata.releaseNotes === 'string' && metadata.releaseNotes.length <= 50_000)) &&
     Array.isArray(metadata.assets) && metadata.assets.length > 0 &&
     metadata.assets.every((asset) =>
       typeof asset.abi === 'string' &&
@@ -200,7 +204,7 @@ export function LatestDownloads() {
     <section className="download section" id="downloads" aria-labelledby="download-title">
       <img className="download-icon" src={ICON_URL} alt="" width={80} height={80} />
       <h1 id="download-title">Download akiHz</h1>
-      <p className="download-description">Refresh rate control for Android.</p>
+      <p className="download-description">Official website · Refresh rate control for Android.</p>
       <p className="download-requirements">Android 11+ · Requires Shizuku</p>
 
       {!release && loading && (
@@ -278,6 +282,7 @@ export function LatestDownloads() {
           {loading && release && <p className="download-refreshing" role="status">Checking for a newer release…</p>}
         </div>
       )}
+      <ReleaseNotes version={release?.versionName} notes={release?.releaseNotes} loading={loading} />
       <a className="project-link" href={REPO_URL} target="_blank" rel="noreferrer">Setup &amp; documentation on GitHub</a>
     </section>
   )

@@ -46,6 +46,7 @@ type ReleaseMetadata = {
   requirements: { shizuku: { required: boolean; url: string } }
   signingCertificate: { sha256: string }
   assets: ReleaseAsset[]
+  releaseNotes?: string
 }
 
 function isValidAsset(asset: ReleaseAsset, versionName: string) {
@@ -127,6 +128,29 @@ async function fetchMetadataViaApi() {
   return requestJson(assetUrl, 'application/octet-stream')
 }
 
+async function fetchReleaseNotes(versionName: string): Promise<string | undefined> {
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/anlaki-py/akihz/releases/tags/${encodeURIComponent(`v${versionName}`)}`,
+      {
+        headers: { Accept: 'application/vnd.github+json', 'User-Agent': 'akiHz-website' },
+        signal: AbortSignal.timeout(3_000),
+      },
+    )
+    if (!response.ok) throw new Error(`GitHub returned HTTP ${response.status}`)
+    const release: unknown = await response.json()
+    if (!release || typeof release !== 'object' ||
+      !('tag_name' in release) || release.tag_name !== `v${versionName}` ||
+      !('body' in release) || typeof release.body !== 'string' || release.body.length > 50_000) {
+      throw new Error('GitHub returned invalid release notes')
+    }
+    return release.body.trim() || undefined
+  } catch (error) {
+    console.warn('[akiHz release notes] Could not load notes:', error instanceof Error ? error.message : 'Unknown error')
+    return undefined
+  }
+}
+
 async function fetchValidatedMetadata() {
   const errors: MetadataError[] = []
   for (const strategy of [fetchDirectMetadata, fetchMetadataViaApi]) {
@@ -162,6 +186,7 @@ export async function GET() {
 
   try {
     const metadata = await fetchValidatedMetadata()
+    metadata.releaseNotes = await fetchReleaseNotes(metadata.versionName)
     lastGoodMetadata = { value: metadata, fetchedAt: Date.now() }
     return metadataResponse(metadata)
   } catch (error) {

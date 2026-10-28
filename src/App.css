@@ -77,3 +77,13 @@ md-filled-button .material-icon, md-text-button .material-icon { width: 20px; he
   .project-link { margin-top: 12px; }
   .footer { padding-block: 8px; }
 }
+
+.release-notes { margin-top: 24px; padding: 20px; text-align: left; border: 1px solid var(--md-sys-color-outline-variant); border-radius: 20px; overflow-wrap: anywhere; }
+.release-notes h2 { margin: 0 0 16px; color: #fff; font-size: 19px; font-weight: 500; }
+.release-notes h3 { margin: 20px 0 8px; font-size: 14px; font-weight: 600; }
+.release-notes p, .release-notes ul { margin: 8px 0; color: var(--md-sys-color-on-surface-variant); font-size: 13px; line-height: 1.7; }
+.release-notes p { white-space: pre-wrap; }
+.release-notes ul { padding-left: 20px; }
+.release-notes li + li { margin-top: 6px; }
+.release-notes a { color: var(--md-sys-color-primary); text-underline-offset: 3px; }
+.full-changelog { display: inline-block; padding-block: 12px; margin-top: 8px; font-size: 13px; }

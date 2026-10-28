@@ -15,6 +15,7 @@ assert.match(
 assert.match(download, /If this check does not finish/, 'download fallback must explain when to use it')
 
 for (const [name, html] of [['home', home], ['download', download]]) {
+  assert.match(html, /View full changelog/, `${name} must offer the full changelog without JavaScript`)
   assert.match(html, /<h1 id="download-title">Download akiHz<\/h1>/, `${name} must show downloads immediately`)
   assert.match(html, /href="https:\/\/github\.com\/anlaki-py\/akihz\/releases\/latest"/, `${name} must offer downloads without JavaScript or a working API`)
   assert.match(html, /aria-label="akiHz GitHub repository"/, `${name} repository link must keep its accessible name`)
